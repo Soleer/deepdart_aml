@@ -810,7 +810,7 @@ def non_max_suppression(prediction,
                         agnostic=False,
                         multi_label=False,
                         labels=(),
-                        max_det=300):
+                        max_det=3):
     """Non-Maximum Suppression (NMS) on inference results to reject overlapping bounding boxes
 
     Returns:
@@ -826,8 +826,8 @@ def non_max_suppression(prediction,
     assert 0 <= iou_thres <= 1, f'Invalid IoU {iou_thres}, valid values are between 0.0 and 1.0'
 
     # Settings
-    # min_wh = 2  # (pixels) minimum box width and height
-    max_wh = 7680  # (pixels) maximum box width and height
+    min_wh = 8  # (pixels) minimum box width and height
+    max_wh = 80  # (pixels) maximum box width and height
     max_nms = 30000  # maximum number of boxes into torchvision.ops.nms()
     time_limit = 0.3 + 0.03 * bs  # seconds to quit after
     redundant = True  # require redundant detections

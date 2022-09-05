@@ -2,4 +2,4 @@ nc: 1
 train: ./dataset/train
 val: ./dataset/val
 test: ./dataset/test
-names: ["."]
+names: [""]
