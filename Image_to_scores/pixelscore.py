@@ -7,7 +7,7 @@ from PIL import Image as img
 
 
 
-labels = pd.read_pickle(f'./dataset/labels.pkl')
+labels = pd.read_pickle(f'../dataset/labels.pkl')
 newcalpts = np.array([[170*np.cos(11/20*pi),170*np.sin(11/20*pi)],[170*np.cos(31/20*pi),170*np.sin(31/20*pi)],[170*np.cos(21/20*pi),170*np.sin(21/20*pi)],[170*np.cos(1/20*pi),170*np.sin(1/20*pi)]])
 b = np.array([6,13,4,18,1,20,5,12,9,14,11,8,16,7,19,3,17,2,15,10])
 radb = np.arange(20)*pi/10 + pi/20
@@ -55,7 +55,7 @@ for i in range(len(labels)): ##über len(labels)
     oldcalpts = np.array(labels["xy"][i][0:4])
     h = homography(oldcalpts)
     
-    im_old = cv2.imread((f'./dataset/cropped_images/800/{labels["img_folder"][i]}/{labels["img_name"][i]}'), cv2.IMREAD_GRAYSCALE) ##bilder in gleichem Ordner wie Code abgelegt, eventuell Ordnerpfad einfügen, da doppelte Bildernamen auftreten könnten
+    im_old = cv2.imread((f'../dataset/cropped_images/800/{labels["img_folder"][i]}/{labels["img_name"][i]}'), cv2.IMREAD_GRAYSCALE) ##bilder in gleichem Ordner wie Code abgelegt, eventuell Ordnerpfad einfügen, da doppelte Bildernamen auftreten könnten
     im_old_arr = np.array(im_old)
     
     ###pixel in koordinaten zwischen 0,1 umgewandelt wie für calpts

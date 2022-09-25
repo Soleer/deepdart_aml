@@ -7,7 +7,7 @@ from PIL import Image as img
 
 
 #load data and set constants
-labels = pd.read_pickle(f'./dataset/labels.pkl')
+labels = pd.read_pickle(f'../dataset/labels.pkl')
 newcalpts = np.array([[170*np.cos(11/20*pi),170*np.sin(11/20*pi)],[170*np.cos(31/20*pi),170*np.sin(31/20*pi)],
                       [170*np.cos(21/20*pi),170*np.sin(21/20*pi)],[170*np.cos(1/20*pi),170*np.sin(1/20*pi)]])
 
@@ -51,7 +51,7 @@ for i in range(len(labels)): ##über len(labels)
     oldcalpts = np.array(labels["xy"][i][0:4])
     h = homography(oldcalpts)
     ###bilder in gleichem Ordner wie Code abgelegt, eventuell Ordnerpfad einfügen, da doppelte Bildernamen auftreten könnten
-    im_old = cv2.imread((f'./dataset/cropped_images/800/{labels["img_folder"][i]}/{labels["img_name"][i]}'), cv2.IMREAD_GRAYSCALE)
+    im_old = cv2.imread((f'../dataset/cropped_images/800/{labels["img_folder"][i]}/{labels["img_name"][i]}'), cv2.IMREAD_GRAYSCALE)
     im_old_arr = np.array(im_old)
     
     ###pixel in koordinaten zwischen 0,1 umgewandelt wie für calpts
@@ -70,6 +70,6 @@ for i in range(len(labels)): ##über len(labels)
     ###score pro pixel berechnen
     pixelscore = dartscore(polar_coords)
     
-    imwrite(f'T:/deepdart_data/{labels["img_folder"][i]}/{os.path.splitext(labels["img_name"][i])[0]}.tif',pixelscore, compression='zlib')
+    imwrite(f'T:/deepdart_data_ring/{labels["img_folder"][i]}/{os.path.splitext(labels["img_name"][i])[0]}.tif',pixelscore, compression='zlib')
     
     
