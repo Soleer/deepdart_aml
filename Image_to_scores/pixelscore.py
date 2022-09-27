@@ -49,13 +49,29 @@ def dartscore(dart):
 
     return scores
 
+d1_val = ['d1_02_06_2020', 'd1_02_16_2020', 'd1_02_22_2020']
+d1_test = ['d1_03_03_2020', 'd1_03_19_2020', 'd1_03_23_2020', 'd1_03_27_2020', 'd1_03_28_2020', 'd1_03_30_2020', 'd1_03_31_2020']
 
+d2_val = ['d2_02_03_2021', 'd2_02_05_2021']
+d2_test = ['d2_03_03_2020', 'd2_02_10_2021', 'd2_02_03_2021_2']
+#new split:
+val = d1_val + d2_val
+test = d1_test + d2_test
 
 for i in range(len(labels)): ##über len(labels)
+
+    if labels["img_folder"][i] in val:
+        group = 'val'
+    elif labels["img_folder"][i] in test:
+        group = 'test'
+    else:
+        group = 'train'
+
+
     oldcalpts = np.array(labels["xy"][i][0:4])
     h = homography(oldcalpts)
     
-    im_old = cv2.imread((f'./dataset/cropped_images/800/{labels["img_folder"][i]}/{labels["img_name"][i]}'), cv2.IMREAD_GRAYSCALE) ##bilder in gleichem Ordner wie Code abgelegt, eventuell Ordnerpfad einfügen, da doppelte Bildernamen auftreten könnten
+    im_old = cv2.imread((f'./dataset/cropped_images/800/{group}/{labels["img_folder"][i]}/{labels["img_name"][i]}'), cv2.IMREAD_GRAYSCALE) ##bilder in gleichem Ordner wie Code abgelegt, eventuell Ordnerpfad einfügen, da doppelte Bildernamen auftreten könnten
     im_old_arr = np.array(im_old)
     
     ###pixel in koordinaten zwischen 0,1 umgewandelt wie für calpts
@@ -74,7 +90,7 @@ for i in range(len(labels)): ##über len(labels)
     ###score pro pixel berechnen
     pixelscore = dartscore(polar_coords)
     
-    imwrite(f'T:/deepdart_data/{labels["img_folder"][i]}/{os.path.splitext(labels["img_name"][i])[0]}.tif',pixelscore, compression='zlib')
+    imwrite(f'T:/deepdart_data/{group}/{os.path.splitext(labels["img_name"][i])[0]}.tif',pixelscore, compression='zlib')
 
     #im_new = img.fromarray(pixelscore)
     #im_new.show() ##bild speichern stattdessen
