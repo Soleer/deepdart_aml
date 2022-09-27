@@ -7,7 +7,11 @@ from PIL import Image as img
 
 
 #load data and set constants
+<<<<<<< HEAD
 labels = pd.read_pickle(f'labels.pkl')
+=======
+labels = pd.read_pickle(f'../dataset/labels.pkl')
+>>>>>>> a6139467ff006e1ba9e7e26043041d80e16b0a19
 newcalpts = np.array([[170*np.cos(11/20*pi),170*np.sin(11/20*pi)],[170*np.cos(31/20*pi),170*np.sin(31/20*pi)],
                       [170*np.cos(21/20*pi),170*np.sin(21/20*pi)],[170*np.cos(1/20*pi),170*np.sin(1/20*pi)]])
 
@@ -68,7 +72,11 @@ for i in range(len(labels)): ##über len(labels)
     oldcalpts = np.array(labels["xy"][i][0:4])
     h = homography(oldcalpts)
     ###bilder in gleichem Ordner wie Code abgelegt, eventuell Ordnerpfad einfügen, da doppelte Bildernamen auftreten könnten
+<<<<<<< HEAD
     im_old = cv2.imread((f'cropped_images/800/{group}/{labels["img_folder"][i]}/{labels["img_name"][i]}'), cv2.IMREAD_GRAYSCALE)
+=======
+    im_old = cv2.imread((f'../dataset/cropped_images/800/{labels["img_folder"][i]}/{labels["img_name"][i]}'), cv2.IMREAD_GRAYSCALE)
+>>>>>>> a6139467ff006e1ba9e7e26043041d80e16b0a19
     im_old_arr = np.array(im_old)
     
     ###pixel in koordinaten zwischen 0,1 umgewandelt wie für calpts
@@ -86,7 +94,12 @@ for i in range(len(labels)): ##über len(labels)
     
     ###score pro pixel berechnen
     pixelscore = dartscore(polar_coords)
+<<<<<<< HEAD
 
     imwrite(f'deepdart_data_ring/{group}/{os.path.splitext(labels["img_name"][i])[0]}.tif',pixelscore, compression='zlib')
+=======
+    
+    imwrite(f'T:/deepdart_data_ring/{labels["img_folder"][i]}/{os.path.splitext(labels["img_name"][i])[0]}.tif',pixelscore, compression='zlib')
+>>>>>>> a6139467ff006e1ba9e7e26043041d80e16b0a19
     
     
