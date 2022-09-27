@@ -88,7 +88,7 @@ for i in range(len(labels)): ##über len(labels)
     ###score pro pixel berechnen
     pixelscore = dartscore(polar_coords)
     
-    imwrite(f'deepdart_data/{group}/{os.path.splitext(labels["img_name"][i])[0]}.tif',pixelscore, compression='zlib')
+    imwrite(f'deepdart_data_wedge/{group}/{os.path.splitext(labels["img_name"][i])[0]}.tif',pixelscore, compression='zlib')
 
     
     
